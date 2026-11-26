@@ -1,7 +1,7 @@
-// Public browser configuration. The publishable key is designed for public clients;
-// database access is protected by Row Level Security policies in supabase/schema.sql.
-// Fill these values for local testing, or let the GitHub Pages workflow inject them.
+// Public browser configuration for the Alur Baksho Supabase project.
+// A publishable key is intended for browser use; Row Level Security protects data.
+// Never place a service_role or secret key in this file.
 window.ALUR_BAKSHO_CONFIG = Object.freeze({
-  supabaseUrl: 'https://YOUR_PROJECT_REF.supabase.co',
-  supabasePublishableKey: 'YOUR_SUPABASE_PUBLISHABLE_KEY'
+  supabaseUrl: 'https://aefmzpamoijwnfzzmdqy.supabase.co',
+  supabasePublishableKey: 'sb_publishable_YX8x1NyyBwLMZurGHq_RsA_R41iNVvC'
 });
