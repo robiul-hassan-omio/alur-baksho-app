@@ -22,27 +22,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Inject public Supabase configuration
-        env:
-          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
-        run: |
-          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_PUBLISHABLE_KEY" ]; then
-            echo "Missing SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY repository variable. Add both under Settings > Secrets and variables > Actions > Variables."
-            exit 1
-          fi
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          config = {
-              "supabaseUrl": os.environ["SUPABASE_URL"],
-              "supabasePublishableKey": os.environ["SUPABASE_PUBLISHABLE_KEY"],
-          }
-          Path("frontend/js/config.js").write_text(
-              "window.ALUR_BAKSHO_CONFIG = Object.freeze(" + json.dumps(config) + ");\n",
-              encoding="utf-8",
-          )
-          PY
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v4
         with:
