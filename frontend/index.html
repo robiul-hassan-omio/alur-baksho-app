@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101321">
+  <meta name="description" content="Alur Baksho — a quieter corner of the internet for stories worth keeping.">
+  <title>Sign in · Alur Baksho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2" defer></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/utils/supabase.js" defer></script>
+  <script src="js/utils/api.js" defer></script>
+  <script src="js/login.js" defer></script>
+</head>
+<body class="auth-page">
+  <details class="theme-switcher" aria-label="Appearance settings">
+    <summary><span class="theme-switcher-glyph" aria-hidden="true">◐</span> Appearance</summary>
+    <div class="theme-switcher-panel">
+      <p>Choose a colour theme</p>
+      <div class="theme-options">
+        <label><input type="radio" name="appearance" value="light" checked><span class="theme-swatch theme-swatch-light"></span><span>Light</span></label>
+        <label><input type="radio" name="appearance" value="dark"><span class="theme-swatch theme-swatch-dark"></span><span>Dark</span></label>
+        <label><input type="radio" name="appearance" value="ocean"><span class="theme-swatch theme-swatch-ocean"></span><span>Ocean</span></label>
+        <label><input type="radio" name="appearance" value="lavender"><span class="theme-swatch theme-swatch-lavender"></span><span>Lavender</span></label>
+      </div>
+      <small>CSS-only appearance controls. The choice applies to this page.</small>
+    </div>
+  </details>
+
+  <main class="auth-shell">
+    <section class="auth-story-panel">
+      <a class="brand brand-light" href="index.html" aria-label="Alur Baksho home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span class="brand-wordmark">alur<span>baksho</span></span>
+      </a>
+
+      <div class="story-copy">
+        <span class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> YOUR SPACE, YOUR STORIES</span>
+        <h1>A little place<br>for the things<br><em>that matter.</em></h1>
+        <p>Thoughts, moments, and tiny chapters of life — all in one thoughtful corner of the internet.</p>
+      </div>
+
+      <div class="story-note-card">
+        <div class="note-topline"><span>THE DAILY NOTE</span><span>NO. 001</span></div>
+        <p>“Somewhere between the ordinary and extraordinary, there are stories waiting to be told.”</p>
+        <div class="note-footer"><span class="note-avatar">A</span><span>AN OPEN PAGE</span><span class="note-sparkle">✳</span></div>
+      </div>
+      <div class="story-orbit orbit-one"></div>
+      <div class="story-orbit orbit-two"></div>
+      <span class="story-coordinate">23° 45' N&nbsp; / &nbsp;90° 23' E</span>
+    </section>
+
+    <section class="auth-form-panel">
+      <div class="auth-mobile-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span class="brand-wordmark">alur<span>baksho</span></span>
+        </a>
+      </div>
+      <div class="auth-form-wrap">
+        <div class="auth-heading">
+          <span class="eyebrow">WELCOME BACK</span>
+          <h2>Pick up where<br>you left off.</h2>
+          <p>Your corner is right where you left it.</p>
+        </div>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <label class="field-label" for="login-identifier">Email address</label>
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.6-3.2 3-5 7-5s6.4 1.8 7 5"></path></svg>
+            <input id="login-identifier" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+          </div>
+
+          <div class="field-label-row">
+            <label class="field-label" for="login-password">Password</label>
+            <span class="field-hint">Your account password</span>
+          </div>
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+            <button class="password-toggle" type="button" data-password-toggle="login-password" aria-label="Show password">Show</button>
+          </div>
+
+          <p id="login-error" class="form-message form-message-error" role="alert" hidden></p>
+          <p id="login-success" class="form-message form-message-success" role="status" hidden></p>
+
+          <button id="login-submit" class="button button-primary button-wide" type="submit">
+            <span>Enter your space</span><span class="button-arrow">↗</span>
+          </button>
+        </form>
+
+        <p class="auth-switch">New around here? <a href="register.html">Create your account <span>↗</span></a></p>
+        <div class="auth-bottom-note"><span class="tiny-star">✳</span> A small space to be wonderfully human.</div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Small shared interaction for showing/hiding password fields.
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest('[data-password-toggle]');
+      if (!toggle) return;
+      const input = document.getElementById(toggle.dataset.passwordToggle);
+      const visible = input.type === 'password';
+      input.type = visible ? 'text' : 'password';
+      toggle.textContent = visible ? 'Hide' : 'Show';
+      toggle.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+    });
+  </script>
+</body>
+</html>
